@@ -1,0 +1,12 @@
+  <mat-card>
+    <mat-form-field>
+      <input matInput type="text" [(ngModel)]="entryTitle" placeholder="Title">
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput rows="6" cols="6" placeholder="Ex. content: It makes me feel..." [(ngModel)]="entryContent"></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="onAddPost()" type="button">Sent Post</button>
+  </mat-card>
+
+
+

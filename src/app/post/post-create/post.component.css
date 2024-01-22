@@ -1,0 +1,35 @@
+.margin-form{
+  width: 100%;
+  margin-top: 50px;
+}
+
+mat-form-field{
+  width: 100%;
+}
+
+mat-card{
+  align-items: center;
+  margin: auto;
+  width: 80%;
+  text-decoration-color: whitesmoke;
+  color: palevioletred;
+}
+
+white-text{
+  color: white;
+}
+
+p{
+  text-decoration-color: white;
+}
+
+textarea{
+  width: 100%;
+  height: 100px;
+}
+
+button{
+  align-items: center;
+  width: 20%;
+  margin: center;
+}
