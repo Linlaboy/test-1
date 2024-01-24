@@ -8,7 +8,6 @@ mat-form-field{
 }
 
 mat-card{
-  align-items: center;
   margin: auto;
   width: 80%;
   text-decoration-color: whitesmoke;
@@ -29,7 +28,6 @@ textarea{
 }
 
 button{
-  align-items: center;
-  width: 20%;
+  width: 10%;
   margin: center;
 }

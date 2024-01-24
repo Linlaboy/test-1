@@ -3,9 +3,8 @@ body{
 }
 
 main{
-  width: 80%;
-  margin: auto;
+  margin: 1rem auto;
   margin-top: 26px;
-  align-items: center;
+
 }
 

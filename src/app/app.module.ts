@@ -12,6 +12,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { HeaderComponent } from './header/header.component';
 import { PostListComponent } from './post/post-list/post-list.component';
+import { PostsService } from './post/posts.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -28,10 +30,12 @@ import { PostListComponent } from './post/post-list/post-list.component';
     MatFormFieldModule,
     MatToolbarModule,
     MatExpansionModule,
+    HttpClientModule,
     HeaderComponent,
     PostListComponent
   ],
   providers: [
+    PostsService,
     provideClientHydration()
   ],
   bootstrap: [AppComponent]
