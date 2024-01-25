@@ -1,13 +1,9 @@
 <mat-toolbar>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>My Messenger</span>
-  <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <mat-icon>favorite</mat-icon>
-  </button>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-    <mat-icon>share</mat-icon>
-  </button>
+  <span class="example-spacer">
+    <a routerLink="/"></a>
+    My Messenger</span>
+  <ul>
+    <li><a mat-button routerLink="/create" routerLinkActive="active" ariaCurrentWhenActive="page">Create</a></li>
+    <li><a mat-button routerLink="/edit/:postId" routerLinkActive="active" ariaCurrentWhenActive="page">Edit</a></li>
+  </ul>
 </mat-toolbar>

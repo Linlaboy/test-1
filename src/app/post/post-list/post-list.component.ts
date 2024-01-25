@@ -1,5 +1,5 @@
 import { PostsService } from './../posts.service';
-import { Post } from './../post.model';
+import { Post } from '../../../../model/post.model';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatExpansionModule, MatExpansionPanel } from '@angular/material/expansion';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -9,6 +9,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
+import { RouterModule } from '@angular/router';
 
 
 @Component({
@@ -21,6 +22,7 @@ import { Subscription } from 'rxjs';
   MatInputModule,
   MatFormFieldModule,
   MatIconModule,
+  RouterModule,
   CommonModule,
   ],
   templateUrl: `./post-list.component.html`,
@@ -48,8 +50,6 @@ export class PostListComponent implements OnInit, OnDestroy{
     this.postsService.deletePost(postId);
   }
 
-  editPost(postId: string, newTitle: string, newContent: string): void {
-    this.postsService.editPost(postId, newTitle, newContent);
-  }
+
 
 }

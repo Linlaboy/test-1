@@ -14,6 +14,8 @@ import { HeaderComponent } from './header/header.component';
 import { PostListComponent } from './post/post-list/post-list.component';
 import { PostsService } from './post/posts.service';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -22,7 +24,11 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
+    RouterOutlet,
+    RouterLink,
+    RouterLink,
     PostComponent,
     FormsModule,
     BrowserAnimationsModule,

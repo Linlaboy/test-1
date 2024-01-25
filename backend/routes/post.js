@@ -1,41 +1,11 @@
-const express = require('express');  // import express
-const bodyParser = require('body-parser');  // import body-parser
-const Post = require('./models/post'); // import the Post model, ensure this is correctly referenced
+const express = require('express');
 
-const mongoose = require('mongoose'); // import mongoose
-const postRoutes = require('./routes/post'); // import the post routes
+const Post = require('../models/post'); // import the Post model, ensure this is correctly referenced
 
-const app = express();  // create express app
-
-// Connect to the database
-mongoose.connect(
-  'mongodb+srv://autbeam:beamukd.aut2011@cluster0.wdvod6s.mongodb.net/?retryWrites=true&w=majority'
-  )
-  .then(() => {
-    console.log('Connected to database!');
-  })
-  .catch(() => {
-    console.log('Connection failed!');
-  });
-
-// Middleware for parsing JSON and URL encoded data
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
-// CORS headers setup
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept');
-  res.setHeader(
-    'Access-Control-Allow-Methods',
-    'GET, POST, PATCH, PUT, DELETE, OPTIONS');
-  next();
-});
+const router = express.Router();
 
 // Post creation route
-app.post("/api/posts", (req, res, next) => {
+router.post("/api/posts", (req, res, next) => {
   const post = new Post({  // create a new Post object
 
     title: req.body.title,
@@ -56,7 +26,7 @@ app.post("/api/posts", (req, res, next) => {
 
 
 // Get posts route
-app.get('/api/posts', (req, res, next) => {
+router.get( (req, res, next) => {
   Post.find()
     .then(documents => {
       console.log(documents);
@@ -71,7 +41,7 @@ app.get('/api/posts', (req, res, next) => {
     });
 });
 
-app.get('/api/posts/:id', (req, res, next) => {
+router.get('/:id', (req, res, next) => {
   Post.findById(req.params.id).then(post => {
     if (post) {
       res.status(200).json(post);
@@ -87,7 +57,7 @@ app.get('/api/posts/:id', (req, res, next) => {
   });
 });
 
-app.delete('/api/posts/:id', (req, res, next) => {
+router.delete('/:id', (req, res, next) => {
   Post.deleteOne({ _id: req.params.id }).then(result => {
     console.log(result);
     res.status(200).json({
@@ -100,7 +70,7 @@ app.delete('/api/posts/:id', (req, res, next) => {
   });
 });
 
-app.put('/api/posts/:id', (req, res, next) => {
+router.put('/:id', (req, res, next) => {
   const post = new Post({
     _id: req.body.id,
     title: req.body.title,
@@ -118,5 +88,4 @@ app.put('/api/posts/:id', (req, res, next) => {
   });
 });
 
-app.use("/api/posts", postRoutes);
-module.exports = app;  // export the app
+module.exports = router;  // export the router

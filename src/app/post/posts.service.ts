@@ -1,9 +1,8 @@
 import { Injectable } from "@angular/core";
-import { Post } from "./post.model";
-import { Subject } from 'rxjs';
-import { map } from 'rxjs';
+import { Post } from "../../../model/post.model";
 import { HttpClient } from "@angular/common/http";
-
+import { Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class PostsService {
@@ -36,7 +35,7 @@ export class PostsService {
   }
 
   addPost(title: string, content: string) {
-    const post: Post = { id: '', title: title, content: content};
+    const post: Post = { id: null, title: title, content: content};
     this.http
     .post<{postId: string, message: string, posts: Post}>('http://localhost:3000/api/posts', post) // post request
     .subscribe((responseData) => {
@@ -46,6 +45,19 @@ export class PostsService {
       this.postsUpdated.next([...this.posts]); // emit the new post
     });
   }
+
+  updatePost(id: string, title: string, content: string) {
+    const post: Post = { id: id, title: title, content: content};
+    this.http.put('http://localhost:3000/api/posts/' + id, post) // put request
+    .subscribe(response =>
+      {
+        const updatedPosts = [...this.posts]; // copy the posts array
+        const oldPostIndex = updatedPosts.findIndex(p => p.id === post.id); // find the index of the post
+        updatedPosts[oldPostIndex] = post; // update the post
+        this.posts = updatedPosts; // update the posts array
+        this.postsUpdated.next([...this.posts]); // emit the updated posts
+      });
+  };
 
   deletePost(postId: string) {
     this.http.delete('http://localhost:3000/api/posts/' + postId) // delete request
@@ -57,12 +69,17 @@ export class PostsService {
     });
   }
 
-  editPost(postId: string, title: string, content: string) {
-    const postIndex = this.posts.findIndex(p => p.id === postId);
-    if (postIndex > -1) {
-      const updatedPost = { ...this.posts[postIndex], title, content };
-      this.posts[postIndex] = updatedPost;
-      this.postsUpdated.next([...this.posts]);
-    }
+  getPost(id: string) {
+    return this.http.get<{_id: string, title: string, content: string}>(
+      `http://localhost:3000/api/posts/${id}`)
+      .pipe(
+        map(responseData => {
+          // additional type checking if necessary
+          return responseData;
+        })
+      );
   }
+
+  // ... other methods ...
+
 }
